@@ -1,7 +1,7 @@
 <template>
     <section>
         <ul>
-            <li v-for= "(todoItem,index) in todoItems" :key="todoItem" class="shadow">                  <!-- 선택한 할 일을 뷰에서 인식하도록 반복 작업의 key값을 선언해야한다. -->
+            <li v-for= "(todoItem,index) in propsdata" :key="todoItem" class="shadow">                  <!-- 선택한 할 일을 뷰에서 인식하도록 반복 작업의 key값을 선언해야한다. -->
                 <i class="checkBtn fas fa-check" aria-hidden="true"></i>
                 {{todoItem}}
                 <span class="removeBtn" type="button" @click= "removeTodo(todoItem,index)">              <!-- @click은 v-on:click과 동일하게 동작한다.-->
@@ -13,18 +13,7 @@
 </template>
 <script>
 export default{
-    data(){
-        return{
-            todoItems: []
-        }
-    },
-    created(){
-        if(localStorage.length>0){
-            for(var i=0; i<localStorage.length; i++){
-                this.todoItems.push(localStorage.key(i))
-            }
-        }
-    },
+    props: ["propsdata"],
     methods:{
         removeTodo(todoItem, index){
             localStorage.removeItem(todoItem);                                      // removeItem은 로컬 스토리지에서 데이터를 삭제하는 API입니다

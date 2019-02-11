@@ -8,7 +8,7 @@
 </template>
 <script>
 export default{
-    data(){
+    data(){                                                                    // 이 부분은 무엇일까?
         return{
             newTodoItem: ''
         }
@@ -17,7 +17,7 @@ export default{
         addTodo(){
             if(this.newTodoItem !==""){
                 var value = this.newTodoItem && this.newTodoItem.trim();       // 이 문법은 왜 포함되어 있는 것일까?
-                localStorage.setItem(value, value);                            // 로컬 스토리지에 데이터를 추가하는 API입니다. API 형식은 키, 값 형태이며
+                this.$emit("addTodo",value);                                   // 로컬 스토리지에 데이터를 추가하는 API입니다. API 형식은 키, 값 형태이며
                 this.clearInput();                                             // 저장 기능을 최대한 단순하게 하기 위해 키, 값 모두 입력 받은 텍스트로 지정합니다.
             }
         },
