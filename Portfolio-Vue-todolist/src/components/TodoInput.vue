@@ -4,13 +4,23 @@
         <span class="addContainer" v-on:click="addTodo">
             <i class="addBtn fas fa-plus" aria-hidden="true"></i>
         </span>
+        <modal v-if= "showModal" @close="showModal = false">
+            <h3 slot="header">경고</h3>
+            <span slot="footer" @click="showModal = false">
+                할 일을 입력하세요.
+                <i class="closeModalBtn fas fa-times" aria-hidden="true"></i>
+            </span>
+        </modal>
     </div>
 </template>
 <script>
+import Modal from "./common/Modal.vue"
+
 export default{
     data(){                                                                    // 이 부분은 무엇일까?
         return{
-            newTodoItem: ''
+            newTodoItem: '',
+            showModal: false
         }
     },
     methods:{
@@ -20,11 +30,17 @@ export default{
                 this.$emit("addTodo",value);                                   // 로컬 스토리지에 데이터를 추가하는 API입니다. API 형식은 키, 값 형태이며
                 this.clearInput();                                             // 저장 기능을 최대한 단순하게 하기 위해 키, 값 모두 입력 받은 텍스트로 지정합니다.
             }
+            else{
+                this.showModal = !this.showModal;
+            }
         },
         clearInput(){
             this.newTodoItem="";
         }
         
+    },
+    components: {
+            Modal: Modal
     }
 
 

@@ -1,19 +1,21 @@
 <template>
     <div class="clearAllContainer">
-        <span class="clearAllBtn" @click="clearTodo">Clear All</span>
+        <span class="clearAllBtn" @click="removeAll">Clear All</span>
     </div>
 </template>
 <script>
 export default{
     methods:{
-        clearTodo(){
-            this.$emit("removeTodo",todoItem,index);
+        removeAll(){
+            this.$emit("removeAll");
         }
     }
 }
 </script>
 <style scoped>
-
+div{
+    margin: 30px auto;
+}
 .clearAllContainer{
     width: 8.5rem;
     height: 50px;

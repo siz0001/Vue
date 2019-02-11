@@ -21,24 +21,23 @@ export default {
   created(){
         if(localStorage.length>0){
             for(var i=0; i<localStorage.length; i++){
-                this.todoItems.push(localStorage.key(i))
+                this.todoItems.push(localStorage.key(i));
             }
         }
   },
   methods:{
-    addTodo(){
+    addTodo(todoItem){
       localStorage.setItem(todoItem, todoItem);
       this.todoItems.push(todoItem);
-    },
-    clearAll(){
-      localStorage.clear();
-      this.todoItems=[];
     },
     removeTodo(todoItem, index){
       localStorage.removeItem(todoItem);                                      // removeItem은 로컬 스토리지에서 데이터를 삭제하는 API입니다
       this.todoItems.splice(index, 1);                                        // splice()는 자바스크립트에 기본적으로 내장되어 있는 API
-    }                                                                           // 배열의 특정 인덱스에서 부여한 숫자만큼의 인덱스를 삭제합니다. 일반적으로 자바스크립트 배열 프로그래밍에서 자주 사용하는 API
-    }
+    },                                                                           // 배열의 특정 인덱스에서 부여한 숫자만큼의 인덱스를 삭제합니다. 일반적으로 자바스크립트 배열 프로그래밍에서 자주 사용하는 API
+    clearAll(){
+      localStorage.clear();
+      this.todoItems=[];
+    },
   },
   components: {
     "TodoHeader": TodoHeader,
@@ -48,7 +47,6 @@ export default {
   }
 }
 </script>
-
 <style>
 body{
     text-align: center;
