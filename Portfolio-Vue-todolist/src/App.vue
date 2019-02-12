@@ -1,13 +1,17 @@
 <template>                                                                      <!-- 최상위 컴포넌트 -->
     <div id="app">
+      <Navbar></Navbar>
+      <div id="container">                                                              <!-- 중복 데이터 발생시 오류 모달 출력하는 기능 추가하기 -->
       <TodoHeader></TodoHeader>
-      <TodoInput v-on:addTodo="addTodo"></TodoInput>
+      <TodoInput v-on:addTodo="addTodo" @duplicateData="duplicateData" ></TodoInput>
       <TodoList v-bind:propsdata="todoItems" @removeTodo="removeTodo"></TodoList>
       <TodoFooter v-on:removeAll="clearAll"></TodoFooter>
+      </div>    
     </div>
 </template>
 
 <script>
+import Navbar from "./components/Navbar.vue";
 import TodoHeader from "./components/TodoHeader.vue";                             // 싱글 파일 컴포넌트 체계(.vue 파일 체계)에서는 특정 컴포넌트에서 다른 위치에 있는 컴포넌트의 내용을 불러올 때 아래 형식을 사용합니다.
 import TodoInput from "./components/TodoInput.vue";                               // import 불러온 파일의 내용이 담길 객체 from "불러올 파일 위치";
 import TodoList from "./components/TodoList.vue";
@@ -20,7 +24,7 @@ export default {
   },
   created(){
         if(localStorage.length>0){
-            for(var i=0; i<localStorage.length; i++){
+            for(var i=0; i<=localStorage.length; i++){
                 this.todoItems.push(localStorage.key(i));
             }
         }
@@ -38,19 +42,24 @@ export default {
       localStorage.clear();
       this.todoItems=[];
     },
+    duplicateData(){
+      alert("이미 작성된 할 일입니다.");
+    }
   },
   components: {
     "TodoHeader": TodoHeader,
     "TodoInput": TodoInput,
     "TodoList": TodoList,
-    "TodoFooter": TodoFooter
+    "TodoFooter": TodoFooter,
+    "Navbar": Navbar
   }
 }
 </script>
 <style>
 body{
     text-align: center;
-    background-color: #f6f6f8;
+    background-color: white;
+    margin:0px;
 }
 input{
   border-style: groove;
@@ -58,6 +67,9 @@ input{
 }
 button{
   border-style: groove;
+}
+#container{
+  padding: 10px 10px;;
 }
 .shadow{
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);

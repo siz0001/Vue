@@ -46,7 +46,7 @@ li{
     line-height: 50px;
     margin: 0.5rem 0;
     padding: 0 0.9rem;
-    background: white;
+    background:  #f6f6f8;
     border-radius:5px;
 }
 
