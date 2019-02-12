@@ -1,7 +1,7 @@
 <template>
     <div class="inputBox shadow">
-        <input type="text" v-model="newTodoItem" placeholder="Type what you have to do!" v-on:keydown.enter="addTodo">
-        <span class="addContainer" v-on:click="addTodo">
+        <input type="text" v-model="newTodoItem" placeholder="Type what you have to do!" @keydown.enter="addTodo">
+        <span class="addContainer">
             <i class="addBtn fas fa-plus" aria-hidden="true"></i>
         </span>
         <modal v-if= "showModal" @close= "showModal = false">
